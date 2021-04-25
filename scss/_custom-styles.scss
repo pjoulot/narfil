@@ -496,7 +496,7 @@ img {
     margin-right: 15px;
     font-weight: 600;
     position: absolute;
-    right: -100px;
+    right: -135px;
     z-index: 1;
     transition: 200ms ease-out;
 }
@@ -588,7 +588,8 @@ input, select, textarea {
   transition: all 0.2s ease-in-out;
   outline: none;
 
-  &:focus {
+  &:focus,
+  &:not(:placeholder-shown) {
     border-color: $primary;
 
     & ~ label {

@@ -6,7 +6,7 @@ var gulp  = require('gulp'),
   postcss      = require('gulp-postcss'),
   autoprefixer = require('autoprefixer');
 
-function buildCss() {
+gulp.task('buildCss', function () {
     return gulp.src(['scss/*.scss'])
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
@@ -25,11 +25,10 @@ function buildCss() {
         .pipe(cleanCss())
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest('css/'))
-}
+});
 
-function watcher() {
-    gulp.watch(['scss/*.scss'], gulp.series(buildCss));
-}
+gulp.task('watch', function () {
+    gulp.watch(['scss/*.scss'], gulp.series('buildCss'));
+});
 
-exports.watch = gulp.series(buildCss, watcher);
-exports.default = gulp.series(buildCss);
+gulp.task('default', gulp.series('buildCss', 'watch'));
