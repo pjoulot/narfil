@@ -44,8 +44,16 @@ gulp.task('copy', function () {
 
   var lity = gulp.src('node_modules/lity/dist/lity.css')
     .pipe(gulp.dest('libraries/lity/css'));
+  var lity_js = gulp.src('node_modules/lity/dist/lity.js')
+    .pipe(gulp.dest('libraries/lity/js'));
 
-  return merge(fortawesome_css, fortawesome_webfonts, hamburger, lity);
+  var jquery = gulp.src('node_modules/jquery/dist/jquery.js')
+    .pipe(gulp.dest('libraries/jquery/js'));
+
+  var isotope = gulp.src('node_modules/isotope-layout/dist/isotope.pkgd.min.js')
+    .pipe(gulp.dest('libraries/isotope/js'));
+
+  return merge(fortawesome_css, fortawesome_webfonts, hamburger, lity, lity_js, jquery, isotope);
 });
 
 gulp.task('default', gulp.series('buildCss', 'copy', 'watch'));
