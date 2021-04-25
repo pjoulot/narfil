@@ -409,6 +409,10 @@ img {
   margin-bottom: 65px;
 }
 
+.img-icon {
+  max-height: 50px;
+}
+
 .icon-big {
   font-size: 56px;
 }
@@ -416,8 +420,14 @@ img {
 /** Portfolio **/
 
 .portfolio-area .works-container .works-item .item-overlay {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
+
+  @include media-breakpoint-down(sm) {
+    img {
+      width: 100%;
+    }
+  }
 }
 
 .portfolio-area .works-container .works-item:hover {
