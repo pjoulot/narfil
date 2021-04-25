@@ -5,6 +5,7 @@ var gulp  = require('gulp'),
   rename = require('gulp-rename'),
   postcss      = require('gulp-postcss'),
   autoprefixer = require('autoprefixer');
+const merge = require('merge-stream');
 
 gulp.task('buildCss', function () {
     return gulp.src(['scss/*.scss'])
@@ -31,4 +32,20 @@ gulp.task('watch', function () {
     gulp.watch(['scss/*.scss'], gulp.series('buildCss'));
 });
 
-gulp.task('default', gulp.series('buildCss', 'watch'));
+gulp.task('copy', function () {
+  var fortawesome_css = gulp.src('node_modules/@fortawesome/fontawesome-free/css/**/*')
+    .pipe(gulp.dest('libraries/fontawesome-free/css'));
+
+  var fortawesome_webfonts = gulp.src('node_modules/@fortawesome/fontawesome-free/webfonts/**/*')
+    .pipe(gulp.dest('libraries/fontawesome-free/webfonts'));
+
+  var hamburger = gulp.src('node_modules/hamburgers/dist/hamburgers.css')
+    .pipe(gulp.dest('libraries/hamburger/css'));
+
+  var lity = gulp.src('node_modules/lity/dist/lity.css')
+    .pipe(gulp.dest('libraries/lity/css'));
+
+  return merge(fortawesome_css, fortawesome_webfonts, hamburger, lity);
+});
+
+gulp.task('default', gulp.series('buildCss', 'copy', 'watch'));
