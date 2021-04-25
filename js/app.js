@@ -98,14 +98,15 @@ $(window).on('load', function () {
 $('#validation').on('submit', function (e) {
   e.preventDefault();
   var subject = $(this).find('[name="request"]').val();
-  var emailTo = $(this).find('[name="email"]').val();
+  var from = $(this).find('[name="email"]').val();
   var name = $(this).find('[name="name"]').val();
   var emailBody = encodeURI('Name: ' + name) + '%0D%0A';
+  var emailBody = emailBody + encodeURI('Email: ' + from) + '%0D%0A';
   var company = $(this).find('[name="company"]').val();
   var emailBody = emailBody + encodeURI('Company: ' + company) + '%0D%0A';
   var phone = $(this).find('[name="phone"]').val();
   var emailBody = emailBody + encodeURI('Phone: ' + phone) + '%0D%0A';
   var message = $(this).find('[name="message"]').val();
   var emailBody = emailBody + encodeURI('Message: ' + message);
-  window.open("mailto:" + emailTo + '?subject=' + encodeURI(subject) + '&body=' + emailBody, '_self');
+  window.open("mailto:contact@narfil.com" + '?subject=' + encodeURI(subject) + '&body=' + emailBody, '_self');
 });
